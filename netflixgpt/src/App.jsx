@@ -3,9 +3,9 @@ import './App.css'
 function App() {
   return (
     <>
-      <h1>Netflix GPT</h1>
+      <h1 className=''>Netflix GPT</h1>
       <div className="main">
-        <div className="bg-black text-white">
+        <div>
           <h1>Welcome to Netflix</h1>
         </div>
       </div>
