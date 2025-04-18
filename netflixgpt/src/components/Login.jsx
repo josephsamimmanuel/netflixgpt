@@ -6,6 +6,7 @@ import { auth } from '../utils/firebase';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { IMAGE_URL, LOGIN_BUTTON, ERROR_MESSAGE, TOAST_MESSAGE } from '../utils/constant';
 
 function Login() {
     const navigate = useNavigate();
@@ -72,7 +73,7 @@ function Login() {
             // The signed-in user info
             const user = result.user;
             console.log('Google Sign-in successful:', user);
-            toast.success('Google Sign-in successful');
+            toast.success(TOAST_MESSAGE.GOOGLE_SIGN_IN_SUCCESS);
             
             // Optional: You can store additional user info or redirect here
             if (user) {
@@ -80,23 +81,23 @@ function Login() {
                 // For example: redirect to home page or update UI
             }
         } catch (error) {
-            let errorMessage = "Failed to sign in with Google. Please try again.";
+            let errorMessage = ERROR_MESSAGE.GOOGLE_SIGN_IN_ERROR;
             toast.error(errorMessage);
             switch (error.code) {
-                case 'auth/popup-closed-by-user':
-                    errorMessage = "Sign-in popup was closed. Please try again.";
+                case ERROR_MESSAGE.POPUP_CLOSED:
+                    errorMessage = ERROR_MESSAGE.POPUP_CLOSED_MESSAGE;
                     toast.error(errorMessage);
                     break;
-                case 'auth/popup-blocked':
-                    errorMessage = "Sign-in popup was blocked. Please enable popups for this site.";
+                case ERROR_MESSAGE.POPUP_BLOCKED:
+                    errorMessage = ERROR_MESSAGE.POPUP_BLOCKED_MESSAGE;
                     toast.error(errorMessage);
                     break;
-                case 'auth/cancelled-popup-request':
-                    errorMessage = "Multiple popup requests were cancelled.";
+                case ERROR_MESSAGE.CANCELLED_POPUP_REQUEST:
+                    errorMessage = ERROR_MESSAGE.CANCELLED_POPUP_REQUEST_MESSAGE;
                     toast.error(errorMessage);
                     break;
-                case 'auth/account-exists-with-different-credential':
-                    errorMessage = "An account already exists with the same email address but different sign-in credentials.";
+                case ERROR_MESSAGE.ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL:
+                    errorMessage = ERROR_MESSAGE.ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL_MESSAGE;
                     toast.error(errorMessage);
                     break;
                 default:
@@ -123,18 +124,18 @@ function Login() {
                     );
                     updateProfile(userCredential.user, {
                         displayName: formData.name, 
-                        photoURL: "https://cdn-icons-png.flaticon.com/512/3001/3001758.png"
+                        photoURL: IMAGE_URL.PHOTO_URL
                       }).then(() => {
                         // Profile updated!
-                        toast.success('Profile updated successfully');
+                        toast.success(TOAST_MESSAGE.PROFILE_UPDATE_SUCCESS);
                         navigate('/browse');
                       }).catch((error) => {
                         // An error occurred
-                        toast.error('Error updating profile');
+                        toast.error(TOAST_MESSAGE.PROFILE_UPDATE_ERROR);
                       });
                     if (userCredential) {
                         console.log('User created successfully:', userCredential.user);
-                        toast.success('User created successfully');
+                        toast.success(TOAST_MESSAGE.SIGN_UP_SUCCESS);
                         setSignUp(false);
                         setFormData({
                             name: "",
@@ -151,7 +152,7 @@ function Login() {
                     );
                     if (userCredential) {
                         navigate('/browse');
-                        toast.success('User signed in successfully');
+                        toast.success(TOAST_MESSAGE.SIGN_IN_SUCCESS);
                     }
                 }
             } catch (error) {
@@ -159,43 +160,43 @@ function Login() {
                 
                 // Handle Firebase auth errors
                 switch (error.code) {
-                    case 'auth/invalid-credential':
-                        toast.error('Please check your credentials.');
+                    case ERROR_MESSAGE.INVALID_CREDENTIAL:
+                        toast.error(ERROR_MESSAGE.INVALID_CREDENTIAL_MESSAGE);
                         break;
-                    case 'auth/email-already-in-use':
-                        toast.error('This email is already registered.');
+                    case ERROR_MESSAGE.EMAIL_ALREADY_IN_USE:
+                        toast.error(ERROR_MESSAGE.EMAIL_ALREADY_IN_USE_MESSAGE);
                         break;
-                    case 'auth/invalid-email':
-                        toast.error('Invalid email format. Please enter a valid email.');
+                    case ERROR_MESSAGE.INVALID_EMAIL:
+                        toast.error(ERROR_MESSAGE.INVALID_EMAIL_MESSAGE);
                         break;
-                    case 'auth/operation-not-allowed':
-                        toast.error('Email/password sign in is not enabled. Please contact support.');
+                    case ERROR_MESSAGE.OPERATION_NOT_ALLOWED:
+                        toast.error(ERROR_MESSAGE.OPERATION_NOT_ALLOWED_MESSAGE);
                         break;
-                    case 'auth/weak-password':
-                        toast.error('Password is too weak. Please choose a stronger password.');
+                    case ERROR_MESSAGE.WEAK_PASSWORD:
+                        toast.error(ERROR_MESSAGE.WEAK_PASSWORD_MESSAGE);
                         break;
-                    case 'auth/user-not-found':
-                        toast.error('No account found with this email. Please sign up.');
+                    case ERROR_MESSAGE.USER_NOT_FOUND:
+                        toast.error(ERROR_MESSAGE.USER_NOT_FOUND_MESSAGE);
                         break;
-                    case 'auth/wrong-password':
-                        toast.error('Incorrect password. Please try again.');
+                    case ERROR_MESSAGE.WRONG_PASSWORD:
+                        toast.error(ERROR_MESSAGE.WRONG_PASSWORD_MESSAGE);
                         break;
-                    case 'auth/too-many-requests':
-                        toast.error('Too many failed attempts. Please try again later.');
+                    case ERROR_MESSAGE.TOO_MANY_REQUESTS:
+                        toast.error(ERROR_MESSAGE.TOO_MANY_REQUESTS_MESSAGE);
                         break;
-                    case 'auth/network-request-failed':
-                        toast.error('Network error. Please check your internet connection.');
+                    case ERROR_MESSAGE.NETWORK_REQUEST_FAILED:
+                        toast.error(ERROR_MESSAGE.NETWORK_REQUEST_FAILED_MESSAGE);
                         break;
-                    case 'auth/invalid-login-credentials':
-                        toast.error('Invalid login credentials. Please check your email and password.');
+                    case ERROR_MESSAGE.INVALID_LOGIN_CREDENTIALS:
+                        toast.error(ERROR_MESSAGE.INVALID_LOGIN_CREDENTIALS_MESSAGE);
                         break;
                     default:
-                        toast.error(error.message || 'An error occurred. Please try again.');
+                        toast.error(error.message || ERROR_MESSAGE.DEFAULT_ERROR);
                 }
             }
         } else {
             console.log("Form has errors:", error);
-            toast.error("Please fix all form errors before submitting");
+            toast.error(TOAST_MESSAGE.FORM_ERROR);
         }
     }
 
@@ -218,7 +219,7 @@ function Login() {
             <Header/>
             <div>
                 <img 
-                    src="https://analyticsindiamag.com/wp-content/uploads/2019/05/apps.55787.9007199266246365.687a10a8-4c4a-4a47-8ec5-a95f70d8852d.jpg" 
+                    src={IMAGE_URL.HEADER_LOGO}
                     alt="logo" 
                     className="w-full h-screen object-cover"
                 />
@@ -226,7 +227,7 @@ function Login() {
                     onSubmit={handleSubmit} 
                     className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center gap-4 w-3/12 p-8 bg-black/60 rounded-lg'
                 >
-                    <h1 className='text-white text-3xl font-bold'>{signUp ? "Sign Up" : "Sign In"}</h1>
+                    <h1 className='text-white text-3xl font-bold'>{signUp ? LOGIN_BUTTON.SIGN_UP : LOGIN_BUTTON.SIGN_IN}</h1>
                     <hr className='w-full' />
 
                     {signUp && (
@@ -271,7 +272,7 @@ function Login() {
                         type='submit'
                         className='p-2 m-2 bg-red-700 text-white rounded-md w-full hover:bg-red-800 transition-colors'
                     >
-                        {signUp ? "Sign Up" : "Sign In"}
+                        {signUp ? LOGIN_BUTTON.SIGN_UP : LOGIN_BUTTON.SIGN_IN}
                     </button>
 
                     <p className='text-gray-400 text-center'> OR </p>
@@ -281,27 +282,27 @@ function Login() {
                         onClick={handleGoogleSignIn}
                     >
                         <img 
-                            src="https://www.google.com/favicon.ico" 
+                            src={IMAGE_URL.GOOGLE_LOGO} 
                             alt="Google" 
                             className="w-5 h-5"
                         />
-                        Continue with Google
+                        {LOGIN_BUTTON.SIGN_IN_WITH_GOOGLE}
                     </button>
                     
                     {!signUp && (
                         <span className='text-gray-400 text-sm text-center hover:underline cursor-pointer'>
-                            Forgot Password?
+                            {LOGIN_BUTTON.FORGOT_PASSWORD}
                         </span>
                     )}
                     
                     <p className='text-gray-400 text-center'>
                         <span>
-                            {signUp ? "Already have an account?" : "New to Netflix?"}{" "}
+                            {signUp ? LOGIN_BUTTON.ALREADY_HAVE_AN_ACCOUNT : LOGIN_BUTTON.NEW_TO_NETFLIX}{" "}
                             <span 
                                 className='text-white hover:underline cursor-pointer' 
                                 onClick={toggleSignUp}
                             >
-                                {signUp ? "Sign In" : "Sign Up"}
+                                {signUp ? LOGIN_BUTTON.SIGN_IN : LOGIN_BUTTON.SIGN_UP}
                             </span>
                         </span>
                     </p>
