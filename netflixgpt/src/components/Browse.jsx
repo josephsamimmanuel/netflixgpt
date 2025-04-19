@@ -6,7 +6,7 @@ import SecondaryContainer from './SecondaryContainer';
 const Browse = () => {
     useNowPlayingMovies();
     return (
-        <div>
+        <div className='bg-gradient-to-b from-gray-900 to-black overflow-hidden'>
             <Header/>
             <MainContainer/>
             <SecondaryContainer/>
