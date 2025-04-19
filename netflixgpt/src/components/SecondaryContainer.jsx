@@ -7,10 +7,7 @@ function SecondaryContainer() {
   const popularMovies = useSelector((store) => store?.movies?.popularMovies);
   const topRatedMovies = useSelector((store) => store?.movies?.topRatedMovies);
   const upcomingMovies = useSelector((store) => store?.movies?.upcomingMovies);
-  console.log('Upcoming Movies', upcomingMovies);
-  console.log('Top Rated Movies', topRatedMovies);
-  console.log('Popular Movies', popularMovies);
-  console.log('Now Playing Movies', movies);
+
   return (
     <div className='mt-[-20%] relative z-20'>
       <MovieList title={"Now Playing"} movies={movies}/>
