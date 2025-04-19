@@ -62,4 +62,10 @@ export const TOAST_MESSAGE = {
     FORM_ERROR: "Please fix all form errors before submitting",
     SIGN_OUT_SUCCESS: "Signed out successfully",
     SIGN_OUT_ERROR: "Failed to sign out. Please try again.",
+    MOVIES_FETCHED_SUCCESS: "Movies fetched successfully",
+    MOVIES_FETCHED_ERROR: "Failed to fetch movies. Please try again.",
+}
+
+export const BASE_URL = {
+    GET_NOW_PLAYING_MOVIES: "https://api.themoviedb.org",
 }

@@ -5,13 +5,10 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthP
 import { auth } from '../utils/firebase';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { IMAGE_URL, LOGIN_BUTTON, ERROR_MESSAGE, TOAST_MESSAGE } from '../utils/constant';
 
 function Login() {
     const navigate = useNavigate();
-    const user = useSelector((state) => state.user);
-    console.log('user', user);
     const [signUp, setSignUp] = useState(false);
     const [formData, setFormData] = useState({
         name: "",
@@ -72,7 +69,6 @@ function Login() {
             
             // The signed-in user info
             const user = result.user;
-            console.log('Google Sign-in successful:', user);
             toast.success(TOAST_MESSAGE.GOOGLE_SIGN_IN_SUCCESS);
             
             // Optional: You can store additional user info or redirect here
@@ -103,7 +99,6 @@ function Login() {
                 default:
                     errorMessage = error.message;
             }
-            console.error("Google Sign-in Error:", error.code, error.message);
             toast.error(errorMessage);
         }
     };
@@ -134,7 +129,6 @@ function Login() {
                         toast.error(TOAST_MESSAGE.PROFILE_UPDATE_ERROR);
                       });
                     if (userCredential) {
-                        console.log('User created successfully:', userCredential.user);
                         toast.success(TOAST_MESSAGE.SIGN_UP_SUCCESS);
                         setSignUp(false);
                         setFormData({
@@ -155,9 +149,7 @@ function Login() {
                         toast.success(TOAST_MESSAGE.SIGN_IN_SUCCESS);
                     }
                 }
-            } catch (error) {
-                console.log('error:-', error);
-                
+            } catch (error) {                
                 // Handle Firebase auth errors
                 switch (error.code) {
                     case ERROR_MESSAGE.INVALID_CREDENTIAL:
@@ -195,7 +187,6 @@ function Login() {
                 }
             }
         } else {
-            console.log("Form has errors:", error);
             toast.error(TOAST_MESSAGE.FORM_ERROR);
         }
     }

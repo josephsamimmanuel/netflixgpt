@@ -13,7 +13,6 @@ function Header() {
   const navigate = useNavigate();
   const photoURL = useSelector((store) => store?.user?.user?.photoURL);
   const user = useSelector((store) => store?.user?.user?.displayName);
-  console.log(user);
   const handleSignOut = () => {
     signOut(auth).then(() => {
       // Sign-out successful.
@@ -21,7 +20,7 @@ function Header() {
       toast.success(TOAST_MESSAGE.SIGN_OUT_SUCCESS);
     }).catch((error) => {
       // An error happened.
-      toast.error(TOAST_MESSAGE.SIGN_OUT_ERROR);
+      toast.error(TOAST_MESSAGE.SIGN_OUT_ERROR, error);
     });
   }
 
@@ -47,11 +46,11 @@ function Header() {
       {window.location.pathname === '/browse' && (
         <div className='flex flex-col items-center gap-2'>
         <div className='flex items-center gap-4'>
-          <img src={photoURL || IMAGE_URL.HEADER_PHOTO_URL} alt="user" className='w-10 h-10 rounded-full' />
+          <img src={photoURL || IMAGE_URL.HEADER_PHOTO_URL} alt="user" className='w-10 h-10 rounded-full border-2 border-gray-300' />
           <button className='bg-red-600 px-4 py-1 rounded-md text-white' onClick={() => handleSignOut()}>{LOGIN_BUTTON.SIGN_OUT}</button>
           
         </div>
-        <p className='text-red-600 gradient-text text-lg'>Hi, {user}</p>
+        <p className='text-white gradient-text text-lg'>Hi, {user}</p>
         </div>
       )}
     </div>
