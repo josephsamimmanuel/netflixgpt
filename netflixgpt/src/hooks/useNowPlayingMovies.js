@@ -6,11 +6,15 @@ import toast from "react-hot-toast";
 import { TOAST_MESSAGE } from "../utils/constant";
 import { useEffect } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const useNowPlayingMovies = () => {
     const dispatch = useDispatch();
+    const nowPlayingMovies = useSelector((store) => store.movies.nowPlayingMovies);
     useEffect(() => {
-        fetchMovies();
+        if (nowPlayingMovies.length === 0) {
+            fetchMovies();
+        }
     }, []);
 
     const fetchMovies = async () => {

@@ -8,7 +8,6 @@ function GptSearchParent() {
     <div className='pt-20 px-6'>
       <img src={IMAGE_URL.HEADER_LOGO} alt="Netflix GPT" className='w-full h-full object-cover opacity-20' />
       <GptSearchBar/>
-      <GptMovieSuggestions/>
     </div>
   )
 }

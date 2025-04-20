@@ -6,11 +6,13 @@ import toast from "react-hot-toast";
 import { TOAST_MESSAGE } from "../utils/constant";
 import { useEffect } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const useUpcomingMovies = () => {
     const dispatch = useDispatch();
+    const upcomingMovies = useSelector((store) => store.movies.upcomingMovies);
     useEffect(() => {
-        fetchMovies();
+        !upcomingMovies && fetchMovies();
     }, []);
 
 
