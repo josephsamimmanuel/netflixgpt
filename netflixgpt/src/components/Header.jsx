@@ -54,11 +54,11 @@ function Header() {
       {window.location.pathname === '/browse' && (
         <div className='flex flex-col items-center gap-2'>
         <div className='flex items-center gap-4'>
-        <select className='p-2 rounded-md bg-black text-white' onChange={(e) => dispatch(setLanguage(e.target.value))}>
+        {gptSearch && <select className='p-2 rounded-md bg-black text-white' onChange={(e) => dispatch(setLanguage(e.target.value))}>
             {LANGUAGES.map((language) => (
               <option key={language.code} value={language.code}>{language.name}</option>
             ))}
-          </select>
+          </select>}
           <button className='bg-red-600 px-4 py-1 rounded-md text-white' onClick={handleGptSearch}>{gptSearch ? 'Browse Page' : 'GPT Search'}</button>
           <img src={photoURL || IMAGE_URL.HEADER_PHOTO_URL} alt="user" className='w-10 h-10 rounded-full border-2 border-gray-300' />
           <button className='bg-red-600 px-4 py-1 rounded-md text-white' onClick={() => handleSignOut()}>{LOGIN_BUTTON.SIGN_OUT}</button>
