@@ -12,9 +12,7 @@ const useNowPlayingMovies = () => {
     const dispatch = useDispatch();
     const nowPlayingMovies = useSelector((store) => store.movies.nowPlayingMovies);
     useEffect(() => {
-        if (nowPlayingMovies.length === 0) {
-            fetchMovies();
-        }
+        fetchMovies();
     }, []);
 
     const fetchMovies = async () => {

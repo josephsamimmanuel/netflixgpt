@@ -11,7 +11,7 @@ const useTopRatedMovies = () => {
     const dispatch = useDispatch();
     const topRatedMovies = useSelector((store) => store.movies.topRatedMovies);
     useEffect(() => {
-        !topRatedMovies && fetchMovies();
+        fetchMovies();
     }, []);
     const fetchMovies = async () => {
         try {

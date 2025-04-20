@@ -12,7 +12,7 @@ const usePopularMovies = () => {
     const dispatch = useDispatch();
     const popularMovies = useSelector((store) => store.movies.popularMovies);
     useEffect(() => {
-        !popularMovies && fetchMovies();
+        fetchMovies();
     }, []);
 
 

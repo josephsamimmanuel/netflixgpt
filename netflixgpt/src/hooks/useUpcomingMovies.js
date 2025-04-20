@@ -12,7 +12,7 @@ const useUpcomingMovies = () => {
     const dispatch = useDispatch();
     const upcomingMovies = useSelector((store) => store.movies.upcomingMovies);
     useEffect(() => {
-        !upcomingMovies && fetchMovies();
+        fetchMovies();
     }, []);
 
 
