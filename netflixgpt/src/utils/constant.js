@@ -14,6 +14,8 @@ export const LOGIN_BUTTON = {
     ALREADY_HAVE_AN_ACCOUNT: "Already have an account?",
     NEW_TO_NETFLIX: "New to Netflix?",
     SIGN_OUT: "Sign Out",
+    GPT_SEARCH: "Search",
+    GPT_INPUT_PLACEHOLDER: "Search for movies or TV shows",
 }
 
 export const ERROR_MESSAGE = {
@@ -70,5 +72,23 @@ export const BASE_URL = {
     GET_NOW_PLAYING_MOVIES: "https://api.themoviedb.org",
 }
 
-// VITE_TMDB_IMAGE_URL=https://image.tmdb.org/t/p/w500
 export const TMDB_IMAGE_URL = "https://image.tmdb.org/t/p/w500";
+
+export const LANGUAGES = [
+    {
+        code: "en",
+        name: "English",
+    },
+    {
+        code: "hi",
+        name: "Hindi",
+    },
+    {
+        code: "es",
+        name: "Spanish",
+    },
+    {
+        code: "ta",
+        name: "Tamil",
+    },
+]
